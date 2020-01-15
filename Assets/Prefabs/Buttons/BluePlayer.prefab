@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4721893317746807310}
   - component: {fileID: 6650522710621491940}
   - component: {fileID: 2629804285560439091}
+  - component: {fileID: 4613971066894170407}
+  - component: {fileID: 4613971066894170408}
   m_Layer: 0
   m_Name: BluePlayer
   m_TagString: Untagged
@@ -93,3 +95,32 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &4613971066894170407
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008434109692921143}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &4613971066894170408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008434109692921143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820ca284dcd29644ea6c01d048568906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonRigidbody: {fileID: 4613971066894170407}

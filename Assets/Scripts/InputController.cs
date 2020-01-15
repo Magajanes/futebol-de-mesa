@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour
 {
     private ShootController shootController;
+    private List<RaycastResult> results = new List<RaycastResult>();
 
     private Ray ray;
     private RaycastHit hit;
@@ -26,7 +28,17 @@ public class InputController : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit))
         {
-            //Do something
+            if (!PointerOverUI())
+                shootController.ExecuteShot(hit.point);
         }
+    }
+
+    private bool PointerOverUI()
+    {
+        var eventData = new PointerEventData(EventSystem.current);
+        eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        results.Clear();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Count > 0;
     }
 }
