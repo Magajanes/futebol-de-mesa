@@ -8,9 +8,16 @@ public class Container : MonoBehaviour
     private InputController inputController;
     [SerializeField]
     private ShootController shootController;
+    [SerializeField]
+    private List<Button> buttons = new List<Button>();
 
     private void Awake()
     {
-        inputController.Initialize(shootController);
+        inputController.InjectDependencies(shootController);
+
+        foreach (var button in buttons)
+        {
+            button.InjectDependencies(shootController);
+        }
     }
 }

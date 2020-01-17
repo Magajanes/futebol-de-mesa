@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4613971066894170408}
   m_Layer: 0
   m_Name: BluePlayer
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6008434109692921143}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.526, y: 0.02, z: 0.606}
-  m_LocalScale: {x: 0.6, y: 0.02, z: 0.6}
+  m_LocalPosition: {x: -0.526, y: 0.03, z: 0.606}
+  m_LocalScale: {x: 0.6, y: 0.03, z: 0.6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
