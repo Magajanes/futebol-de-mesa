@@ -88,7 +88,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6008434109692921143}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c4d31ca27b892af4495cf8e070244405, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -103,14 +103,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6008434109692921143}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 80
+  m_CollisionDetection: 2
 --- !u!114 &4613971066894170408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,4 +123,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820ca284dcd29644ea6c01d048568906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shiftAmount: 2
   buttonRigidbody: {fileID: 4613971066894170407}

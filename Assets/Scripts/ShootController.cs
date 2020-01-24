@@ -35,4 +35,9 @@ public class ShootController : MonoBehaviour
 
         selectedButton.Shoot(shootForce);
     }
+
+    public bool IsButtonSelected(Button button)
+    {
+        return button == selectedButton;
+    }
 }
