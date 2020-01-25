@@ -9,6 +9,7 @@ public class Button : MonoBehaviour
     private float collisionShift;
     private ShootController shootController;
 
+    [Range(0, 0.02f)]
     [SerializeField]
     private float shiftAmount;
     [SerializeField]
@@ -45,7 +46,7 @@ public class Button : MonoBehaviour
             var collisionSpeed = (1 - alpha) * buttonVelocity.magnitude;
             var angle = Vector3.Angle(buttonVelocity, delta);
 
-            if (angle > ANGLE_THRESHOLD)
+            if (angle < ANGLE_THRESHOLD)
             {
                 collisionShift = shiftAmount * angle * buttonVelocity.magnitude;
             }
