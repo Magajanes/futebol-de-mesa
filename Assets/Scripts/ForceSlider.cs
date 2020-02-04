@@ -14,11 +14,14 @@ public class ForceSlider : MonoBehaviour
         {
             return slider.value;
         }
+        set
+        {
+            slider.value = value;
+        }
     }
 
     public void Initialize(float maxValue)
     {
         slider.maxValue = maxValue;
-        slider.value = slider.maxValue;
     }
 }

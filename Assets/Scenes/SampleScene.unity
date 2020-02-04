@@ -626,7 +626,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f385241f09d9a418bee5a0703dfba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  increaseRate: 0.5
   maxForce: 80
+  shootMode: 1
   selectedButton: {fileID: 0}
   forceSlider: {fileID: 1655803890}
 --- !u!1 &922089421

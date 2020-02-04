@@ -11,6 +11,9 @@ public class InputController : MonoBehaviour
     private Ray ray;
     private RaycastHit hit;
 
+    public delegate void ButtonAction();
+    public static event ButtonAction OnButtonUp;
+
     public void InjectDependencies(ShootController shootController)
     {
         this.shootController = shootController;
@@ -23,6 +26,9 @@ public class InputController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
             RaycastToField();
+
+        if (Input.GetMouseButtonUp(1))
+            OnButtonUp?.Invoke();
     }
 
     private void RaycastToButton()

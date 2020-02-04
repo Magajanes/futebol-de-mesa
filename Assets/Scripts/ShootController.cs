@@ -2,11 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ShootMode
+{
+    ForceSlider,
+    ButtonHold
+}
+
 public class ShootController : MonoBehaviour
 {
     [Header("Parameters")]
+    [Range(0.25f, 1)]
+    [SerializeField]
+    private float increaseRate;
     [SerializeField]
     private float maxForce;
+    [SerializeField]
+    private ShootMode shootMode;
 
     [Header("References")]
     [SerializeField]
@@ -14,9 +25,40 @@ public class ShootController : MonoBehaviour
     [SerializeField]
     private ForceSlider forceSlider;
 
+    private bool buildingShot = false;
+    private float currentForce;
+
+    public delegate void ShotAction(Vector3 target);
+    public ShotAction ExecuteShot;
+
+    private void Awake()
+    {
+        InputController.OnButtonUp += StopForceIncrease;
+    }
+
     private void Start()
     {
+        SetShootMode(shootMode);
         forceSlider.Initialize(maxForce);
+    }
+
+    private void SetShootMode(ShootMode mode)
+    {
+        switch (mode)
+        {
+            case ShootMode.ForceSlider:
+                ExecuteShot = ShootWithSlider;
+                forceSlider.Value = maxForce;
+                break;
+
+            case ShootMode.ButtonHold:
+                ExecuteShot = ShootWithButtonHold;
+                forceSlider.Value = 0;
+                break;
+
+            default:
+                break;
+        }
     }
 
     public void Select(Button button)
@@ -24,20 +66,52 @@ public class ShootController : MonoBehaviour
         selectedButton = button;
     }
 
-    public void ExecuteShot(Vector3 target)
+    public void ShootWithSlider(Vector3 target)
     {
         if (selectedButton == null)
             return;
 
-        var buttonPosition = selectedButton.transform.position;
-        var direction = target - buttonPosition;
-        var shootForce = direction.normalized * forceSlider.Value;
+        selectedButton.Shoot(ShootForce(target));
+    }
 
-        selectedButton.Shoot(shootForce);
+    public void ShootWithButtonHold(Vector3 target)
+    {
+        if (selectedButton == null)
+            return;
+
+        buildingShot = true;
+        currentForce = 0;
+
+        StartCoroutine(ForceCoroutine(target));
     }
 
     public bool IsButtonSelected(Button button)
     {
         return button == selectedButton;
+    }
+
+    private void StopForceIncrease()
+    {
+        buildingShot = false;
+    }
+
+    private Vector3 ShootForce(Vector3 target)
+    {
+        var buttonPosition = selectedButton.transform.position;
+        var direction = target - buttonPosition;
+        return direction.normalized * forceSlider.Value;
+    }
+
+    private IEnumerator ForceCoroutine(Vector3 target)
+    {
+        while (buildingShot)
+        {
+            currentForce += increaseRate;
+            forceSlider.Value = currentForce > maxForce ? maxForce : currentForce;
+            yield return null;
+        }
+
+        selectedButton.Shoot(ShootForce(target));
+        forceSlider.Value = 0;
     }
 }
