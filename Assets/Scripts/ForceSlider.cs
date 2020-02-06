@@ -20,7 +20,7 @@ public class ForceSlider : MonoBehaviour
         }
     }
 
-    public void Initialize(float maxValue)
+    public void SetMaxValue(float maxValue)
     {
         slider.maxValue = maxValue;
     }

@@ -16,8 +16,7 @@ public class ShootController : MonoBehaviour
     private float increaseRate;
     [SerializeField]
     private float maxForce;
-    [SerializeField]
-    private ShootMode shootMode;
+    public ShootMode ShootMode;
 
     [Header("References")]
     [SerializeField]
@@ -38,12 +37,15 @@ public class ShootController : MonoBehaviour
 
     private void Start()
     {
-        SetShootMode(shootMode);
-        forceSlider.Initialize(maxForce);
+        forceSlider.SetMaxValue(maxForce);
+        SetShootMode((int)ShootMode);
     }
 
-    private void SetShootMode(ShootMode mode)
+    public void SetShootMode(int modeIndex)
     {
+        var mode = (ShootMode)modeIndex;
+        ShootMode = mode;
+
         switch (mode)
         {
             case ShootMode.ForceSlider:
@@ -90,7 +92,7 @@ public class ShootController : MonoBehaviour
         return button == selectedButton;
     }
 
-    private void StopForceIncrease()
+    public void StopForceIncrease()
     {
         buildingShot = false;
     }

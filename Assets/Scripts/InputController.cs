@@ -14,21 +14,56 @@ public class InputController : MonoBehaviour
     public delegate void ButtonAction();
     public static event ButtonAction OnButtonUp;
 
+    public delegate void InputAction();
+    public InputAction UseInputScheme;
+
     public void InjectDependencies(ShootController shootController)
     {
         this.shootController = shootController;
     }
 
+    private void Start()
+    {
+        SetInputScheme((int)shootController.ShootMode);
+    }
+
     private void Update()
+    {
+        UseInputScheme();
+    }
+
+    public void SetInputScheme(int modeIndex)
+    {
+        var mode = (ShootMode)modeIndex;
+
+        if (mode == ShootMode.ForceSlider)
+        {
+            UseInputScheme = UseForceSliderScheme;
+            return;
+        }
+
+        if (mode == ShootMode.ButtonHold)
+        {
+            UseInputScheme = UseButtonHoldScheme;
+            return;
+        }
+    }
+
+    private void UseForceSliderScheme()
     {
         if (Input.GetMouseButtonDown(0))
             RaycastToButton();
 
         if (Input.GetMouseButtonDown(1))
             RaycastToField();
+    }
+
+    private void UseButtonHoldScheme()
+    {
+        UseForceSliderScheme();
 
         if (Input.GetMouseButtonUp(1))
-            OnButtonUp?.Invoke();
+            shootController.StopForceIncrease();
     }
 
     private void RaycastToButton()
@@ -66,7 +101,6 @@ public class InputController : MonoBehaviour
             shootController.ExecuteShot(hit.point);
         }
     }
-
 
     private bool PointerOverUI()
     {

@@ -9,6 +9,8 @@ public class Container : MonoBehaviour
     [SerializeField]
     private ShootController shootController;
     [SerializeField]
+    private OptionsController optionsController;
+    [SerializeField]
     private List<Button> buttons = new List<Button>();
 
     private void Awake()
